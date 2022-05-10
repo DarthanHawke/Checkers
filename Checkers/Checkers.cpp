@@ -1,48 +1,55 @@
-#include <utility>
+#include "../Checkers/Checkers.h"
 
 
 namespace CheckersGame
 {
 	namespace Models
 	{
-		class Checkers
+		Checkers::Checkers()
+			: m_posX(0)
+			, m_posY(0)
+			, m_color(false)
+		{}
+
+
+		Checkers& Checkers::operator = (const Checkers& copy)
 		{
-		private:
-			// позиция шашки, posX - ось X, posY - ось Y;
-			int posX;
-			int posY;
-			// цвет шашки, 0 - чёрные шашки, 1 - белые шашки;
-			bool color;
-
-
-		public:
-			Checkers()
-			{
-				posX = 0;
-				posY = 0;
-				color = false;
+			if (this != &copy) {
+				m_posX = copy.m_posX;
+				m_posY = copy.m_posY;
+				m_color = copy.m_color;
 			}
+			return *this;
+		}
 
 
-			// сеттер для позиции;
-			void setChecker(int X, int Y, bool side)
-			{
-				posX = X;
-				posY = Y;
-				color = side;
-			}
+		Checkers::Checkers(const Checkers& copy)
+		{
+			m_posX = copy.m_posX;
+			m_posY = copy.m_posY;
+			m_color = copy.m_color;
+		}
 
 
-			// геттер для позиции;
-			std::pair<int, int> getLocate()
-			{
-				return std::pair<int, int>(posX, posY);
-			}
+		Checkers::~Checkers() {}
 
-			bool getColor()
-			{
-				return color;
-			}
-		};
+		void Checkers::setChecker(int X, int Y, bool side)
+		{
+			m_posX = X;
+			m_posY = Y;
+			m_color = side;
+		}
+
+
+		std::pair<int, int> Checkers::getLocate()
+		{
+			return std::pair<int, int>(m_posX, m_posY);
+		}
+
+
+		bool Checkers::getColor()
+		{
+			return m_color;
+		}
 	}
 }

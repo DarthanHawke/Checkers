@@ -1,48 +1,63 @@
+#include "../Checkers/Sell.h"
+
+
 namespace CheckersGame
 {
 	namespace Models
 	{
-		class Sell
+		Sell::Sell()
+			: m_x(0)
+			, m_y(0)
+			, m_side(0)
+			, m_checker(0)
+		{}
+
+
+		Sell& Sell::operator = (const Sell& copy)
 		{
-		private:
-			int x;
-			int y;
-			bool side;
-			bool checker;
-
-
-		public:
-			Sell()
-			{
-				x = 0;
-				y = 0;
-				side = 0;
-				checker = 0;
+			if (this != &copy) {
+				m_x = copy.m_x;
+				m_y = copy.m_y;
+				m_side = copy.m_side;
+				m_checker = copy.m_checker;
 			}
+			return *this;
+		}
 
 
-			void setSide(bool color)
-			{
-				side = color;
-			}
+		Sell::Sell(const Sell& copy)
+		{
+			m_x = copy.m_x;
+			m_y = copy.m_y;
+			m_side = copy.m_side;
+			m_checker = copy.m_checker;
+		}
 
 
-			void setChecker(bool setchecker)
-			{
-				checker = setchecker;
-			}
+		Sell::~Sell() {}
 
 
-			bool getSide()
-			{
-				return side;
-			}
+		void Sell::setSide(bool color)
+		{
+			m_side = color;
+		}
 
 
-			bool getChecker()
-			{
-				return checker;
-			}
-		};
+		void Sell::setChecker(bool setchecker)
+		{
+			m_checker = setchecker;
+		}
+
+
+		bool Sell::getSide()
+		{
+			return m_side;
+		}
+
+
+		bool Sell::getChecker()
+		{
+			return m_checker;
+		}
 	}
 }

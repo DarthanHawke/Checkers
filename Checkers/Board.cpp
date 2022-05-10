@@ -1,73 +1,110 @@
-#include "../Checkers/Sell.cpp"
+#include "../Checkers/Board.h"
 
 
 namespace CheckersGame
 {
 	namespace Models
 	{
-		class Board
+		void Board::initBoard()
 		{
-		private:
-			// шахматная доска
-			Sell** board = new Sell* [8];
+			board = new Sell * [8];
+			for (size_t i = 0; i < 8; ++i) {
+				board[i] = new Sell[8];
+			}
+		}
 
 
-		public:
-			Board()
-			{
-				for (size_t i = 0; i < 8; ++i)
-				{
+		Board::Board()
+		{
+			initBoard();
+			setupBoard(board);
+		}
+
+
+		Board& Board::operator = (const Board& copy)
+		{
+			if (this != &copy) {
+				for (size_t i = 0; i < 8; ++i) {
+					delete[] board[i];
+				}
+				delete[] board;
+				board = new Sell * [8];
+				for (size_t i = 0; i < 8; ++i) {
 					board[i] = new Sell[8];
-				}
-
-				for (size_t y = 0; y < 8; ++++y)
-				{
-					for (size_t x = 0; x < 8; ++++x)
-					{
-						board[x][y].setSide(0);	// чёрное поле
-						board[x][y].setChecker(0);	// шашки нет
-					}
-					for (size_t x = 1; x < 8; ++++x)
-					{
-						board[x][y].setSide(1);	// белое поле
-						board[x][y].setChecker(0);	//шашки нет
-					}
-					for (size_t x = 1; x < 8; ++++x)
-					{
-						board[x][y + 1].setSide(0);	// чёрное поле
-						board[x][y + 1].setChecker(0);	// шашки нет
-					}
-					for (size_t x = 0; x < 8; ++++x)
-					{
-						board[x][y + 1].setSide(1);	// белое поле
-						board[x][y + 1].setChecker(0);	//шашки нет
+					for (size_t j = 0; j < 8; ++j) {
+						board[i][j] = copy.board[i][j];
 					}
 				}
 			}
+			return *this;
+		}
 
 
-			void setonCheckers(int x, int y)
-			{
-				board[x][y].setChecker(1);	// шашка есть
+		Board::Board(const Board& copy)
+			: board(new Sell* [8])
+		{
+			for (size_t i = 0; i < 8; ++i) {
+				board[i] = new Sell[8];
+				for (size_t j = 0; j < 8; ++j) {
+					board[i][j] = copy.board[i][j];
+				}
 			}
+		}
 
 
-			void setoffCheckers(int x, int y)
-			{
-				board[x][y].setChecker(0);	// шашки нет
+		Board::~Board()
+		{
+			for (size_t i = 0; i < 8; ++i) {
+				delete[] board[i];
 			}
+			delete[] board;
+		}
 
 
-			bool getCheckers(int x, int y)
-			{
-				return board[x][y].getChecker();
+		void Board::setupBoard(Sell** board)
+		{
+			for (size_t y = 0; y < 8; ++++y) {
+				for (size_t x = 0; x < 8; ++++x) {
+					board[x][y].setSide(0);    // Чёрное поле
+					board[x][y].setChecker(0);    // Шашки нет
+				}
+				for (size_t x = 1; x < 8; ++++x) {
+					board[x][y].setSide(1);    // Белое поле
+					board[x][y].setChecker(0);    // Шашки нет
+				}
+				for (size_t x = 1; x < 8; ++++x) {
+					board[x][y + 1].setSide(0);    // Чёрное поле
+					board[x][y + 1].setChecker(0);    // Шашки нет
+				}
+				for (size_t x = 0; x < 8; ++++x) {
+					board[x][y + 1].setSide(1);    // Белое поле
+					board[x][y + 1].setChecker(0);    // Шашки нет
+				}
 			}
+		}
 
 
-			bool getField(int x, int y)
-			{
-				return board[x][y].getSide();
-			}
-		};
+		void Board::setonCheckers(int x, int y)
+		{
+			board[x][y].setChecker(1);    // Шашка есть
+		}
+
+
+		void Board::setoffCheckers(int x, int y)
+		{
+			board[x][y].setChecker(0);    // Шашки нет
+		}
+
+
+		bool Board::getCheckers(int x, int y)
+		{
+			return board[x][y].getChecker();
+		}
+
+
+		bool Board::getField(int x, int y)
+		{
+			return board[x][y].getSide();
+		}
 	}
 }

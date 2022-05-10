@@ -43,4 +43,29 @@
       <Filter>Исходные файлы\Models</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sell.h">
+      <Filter>Исходные файлы\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Checkers.h">
+      <Filter>Исходные файлы\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Исходные файлы\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckersActions.h">
+      <Filter>Исходные файлы\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Play.h">
+      <Filter>Исходные файлы\Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="StartMenu.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="FinishMenu.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
